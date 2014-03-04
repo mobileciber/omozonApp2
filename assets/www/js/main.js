@@ -69,10 +69,10 @@ window.LoginView = Backbone.View.extend({
 				password: password
 			};
 		};
-//		alert(username + " / " + password);
+		console.log(username + " / " + password);
 		user.fetch({
 //				data: {},
-				success: function (usermodel) {
+				success: function (usermodel, response, options) {
 					usermodel.set({ username: username, password: password});
 					console.log('Put user in session: ' + JSON.stringify(usermodel.toJSON()));
 					$.session.set('userdata', JSON.stringify(usermodel.toJSON()));
@@ -81,9 +81,16 @@ window.LoginView = Backbone.View.extend({
 					console.log(usermodel.get('username') + " / " + usermodel.get('password'));
 					self.redirect(usermodel);
                 },
-                error:function (e) {
+                error:function (model, xhr, options) {
+                	console.log('error arguments: ', arguments);
+//                	var serializer = new ONEGEEK.GSerializer();
+//                	var serializedObj = serializer.serialize(options, 'model');
+//                	console.log('Remove user from session...' + serializedObj);
                 	$.session.remove('userdata');
 //                    alert(' Service request failure: ' + e);
+                },
+                complete: function(xhr, textStatus) {
+                	console.log('fetch status: ' + textStatus);
                 }
 		});
 //		.complete(function () {

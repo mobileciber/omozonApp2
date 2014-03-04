@@ -12,7 +12,7 @@
 			<a href="#logout" data-role="button" data-icon="delete" class="back ui-btn-right">logout</a>
             <h1>Omozon HTML5-MobileApp</h1>
         </div>
-        <label><%= myGreeting %></label><a href="#logout">logout</a>
+        <label><%= myGreeting %>
         <div data-role="content">
             <h3>Home</h3>
             
@@ -30,26 +30,26 @@
         </div>
 
     </script>
-    
+    <!-- http://jqueryvalidation.org/documentation -->
     <script type="text/template" id="login">
 
         <div data-role="header">
             <h1>Login</h1>
         </div>
-<!-- http://jqueryvalidation.org/documentation -->
+
         <div data-role="content">
 			<div class="alert alert-error" style="display:none;"></div>
-			<form id="loginForm" method="post" action="" onsubmit="$("#loginForm").validate();">
+			<form class="form-horizontal">
 				<div class="control-group">
 					<label class="control-label" for="inputEmail">Email</label>
 					<div class="controls">
-						<input type="text" id="inputEmail" placeholder="Email" required/>
+						<input type="text" id="inputEmail" placeholder="Email">
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="inputPassword">Password</label>
 					<div class="controls">
-						<input type="password" id="inputPassword" placeholder="Password" required/>
+						<input type="password" id="inputPassword" placeholder="Password">
 					</div>
 				</div>
 				<div class="control-group">
@@ -393,15 +393,17 @@
     </script>
 
     <!-- The Scripts -->
+    <script src="lib/gserializer.js"></script>
     <script src="lib/jquery-1.7.1.min.js"></script>
-    <script src="js/jqm-config.js"></script>
     <script src="lib/jquery.mobile-1.0.1.min.js"></script>
     <script src="lib/jquery.session.js"></script>
     <!--script src="lib/underscore-min.js"></script-->
     <script src="lib/underscore.js"></script>
     <!--script src="lib/backbone-min.js"></script-->
-    <script src="lib/backbone-min.js"></script>
-    <script src="js/backbone.basicauth.js"></script>
+    <script src="lib/backbone.js"></script>
+    <script src="lib/backbone.basicauth.js"></script>
+    
+    <script src="js/jqm-config.js"></script>
     <script src="js/model/Person.js"></script>
     <script src="js/model/User.js"></script>
     <script src="js/main.js"></script>

@@ -16,7 +16,7 @@ $(document).bind("mobileinit", function () {
 $(document).on('pagebeforecreate', '[data-role="page"]', function(){    
     console && console.log($.session.get('userdata') + " - pagebeforecreate!!");
     if(typeof $.session.get('userdata') == 'undefined'){
-    	// we don´t want a redirect in case of loading the loginpage or on logout
+    	// we don´t want a redirect in case of loading the login or on logout page
     	if(window.location.hash != 'login' && window.location.hash != 'logout'){
     		window.location.hash = 'login';
     	}
