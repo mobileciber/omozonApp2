@@ -1,5 +1,5 @@
 /bin
-.classpath
-.project
 .idea/**
 .DS_Store
+/local.properties
+/project.properties
