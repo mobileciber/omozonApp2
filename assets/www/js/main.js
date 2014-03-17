@@ -12,11 +12,12 @@
 window.HomeView = Backbone.View.extend({
     // 'this' means 'window', which is the default global object
     // 'bindAll' uses 'bind' internally and 'bind' uses 'apply', which sets the value for 'this'
-	initialize: function() {
+//	initialize: function() {
 //        _.bindAll(this, "render");
 //        this.model.bind("change", this.render);
 //        this.model.fetch();
-    },
+//		return $(this.el).trigger('create');
+//    },
     
     render:function () {
 //        var greeting = 'Hello ' + this.options.name + ' (' + this.options.age + '), father of ' + this.options.child;
@@ -30,15 +31,9 @@ window.HomeView = Backbone.View.extend({
         // Load the compiled HTML into the Backbone "el"
         $(this.el).html( template );
 //      fire the JQM create trigger to refresh the page
-        return $(this.el).trigger('create');
+//        return $(this.el).trigger('create');
+        return this;
     }
-    
-//    
-//
-//    render: function() {
-//        $(this.el).html(Mustache.to_html($('#template').html(), this.model.toJSON());
-//        return this;
-//    }
 });
 
 window.LoginView = Backbone.View.extend({
@@ -69,17 +64,14 @@ window.LoginView = Backbone.View.extend({
 				password: password
 			};
 		};
-		console.log(username + " / " + password);
 		user.fetch({
-//				data: {},
 				success: function (usermodel, response, options) {
 					usermodel.set({ username: username, password: password});
-					console.log('Put user in session: ' + JSON.stringify(usermodel.toJSON()));
+//					console.log('Put user in session: ' + JSON.stringify(usermodel.toJSON()));
 					$.session.set('userdata', JSON.stringify(usermodel.toJSON()));
 					
 					console.log(usermodel.get('name') + " has signed on");
-					console.log(usermodel.get('username') + " / " + usermodel.get('password'));
-					self.redirect(usermodel);
+//					self.redirect();
                 },
                 error:function (model, xhr, options) {
                 	console.log('error arguments: ', arguments);
@@ -87,7 +79,6 @@ window.LoginView = Backbone.View.extend({
 //                	var serializedObj = serializer.serialize(options, 'model');
 //                	console.log('Remove user from session...' + serializedObj);
                 	$.session.remove('userdata');
-//                    alert(' Service request failure: ' + e);
                 },
                 complete: function(xhr, textStatus) {
                 	console.log('fetch status: ' + textStatus);
@@ -98,8 +89,9 @@ window.LoginView = Backbone.View.extend({
 //	    });
     },
     
-    redirect: function(usermodel){
-    	app.changePage(new HomeView());
+    redirect: function(){
+//    	app.changePage(new HomeView());
+//    	app.navigate('home', {trigger: true});
     }
 });
 
@@ -297,6 +289,7 @@ var AppRouter = Backbone.Router.extend({
 
     routes:{
         "":"home",
+        "home":"home",
         "login":"login",
         "logout":"logout",
         "stores":"stores",
@@ -330,32 +323,7 @@ var AppRouter = Backbone.Router.extend({
 
     home:function () {
         console.log('#home');
-//        var user = new User();
-//        user.set({id: 'freddy'}); // without an id backbone will not fetch data from backend
-//        
-//        var username = '';
-//        var password = '';
-        
-        if(typeof $.session.get('userdata') != 'undefined'){
-        	var sessionUser = $.parseJSON($.session.get('userdata'));
-        	console.log('User from JSON: ' + sessionUser.name);
-        	var user = new User();
-        	user.set({id: sessionUser.username});
-        	username = sessionUser.username;
-            password = sessionUser.password;
-            console.log(username + " / " + password);    		
-        } 
-//        else{
-//        	this.changePage(new LoginView());
-//        }
         this.changePage(new HomeView());
-//        user.credentials = function(){
-//			return {
-//				username: username,
-//				password: password
-//			};
-//		};
-//        this.changePage(new HomeView({model : user}));
     },
     
     login: function() {

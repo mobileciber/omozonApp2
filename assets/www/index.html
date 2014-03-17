@@ -9,28 +9,25 @@
     <script type="text/template" id="home">
 
         <div data-role="header">
-			<a href="#logout" data-role="button" data-icon="delete" class="back ui-btn-right">logout</a>
             <h1>Omozon HTML5-MobileApp</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
-        <label><%= myGreeting %>
+        <label><%= myGreeting %></label>
         <div data-role="content">
             <h3>Home</h3>
             
             <ul data-role="listview"  data-inset="true">
-                <li><a href="#stores">Filial Radar</a></li>
-                <li><a href="#storeOffers">Filial Angebote</a></li>
-				<li><a href="#productSearch">Artikel Suche</a></li>
-				<li><a href="#myOmozon">Mein Omozon</a></li>
-				<li><a href="#onlineshop">Onlineshop</a></li>
+                <li><a href="#stores" data-ajax="false">Filial Radar</a></li>
+                <li><a href="#storeOffers" data-ajax="false">Filial Angebote</a></li>
+				<li><a href="#productSearch" data-ajax="false">Artikel Suche</a></li>
+				<li><a href="#myOmozon" data-ajax="false">Mein Omozon</a></li>
+				<li><a href="#onlineshop" data-ajax="false">Onlineshop</a></li>
 			</ul>
-
-			<p>Backbone.js is used for code organization (Models, Views) and "routing".</p>
-            <p>jQuery Mobile is used for its mobile styles and widgets. The routing and navigation capabilities of jQuery Mobile are disbled to let Backbone.js handle these requirements.</p>
-            <p>This is the Home page. It was created dynamically using an underscore.js template.</p>
         </div>
 
     </script>
-    <!-- http://jqueryvalidation.org/documentation -->
+
+	    <!-- http://jqueryvalidation.org/documentation -->
     <script type="text/template" id="login">
 
         <div data-role="header">
@@ -75,16 +72,17 @@
     <script type="text/template" id="stores">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Filial Radar</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Filial Radar". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#">Home</a></li>
-				<li><a href="#storeList">Filialsuchergebnisse</a></li>
+                <li><a href="#home" data-ajax="false">Home</a></li>
+				<li><a href="#storeList" data-ajax="false">Filialsuchergebnisse</a></li>
             </ul>
         </div>
 
@@ -93,16 +91,17 @@
     <script type="text/template" id="storeList">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Filialsuchergebnisse</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Filialsuchergebnisse". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#stores">Filial Radar</a></li>
-				<li><a href="#storeDetails">Filialseite</a></li>
+                <li><a href="#stores" data-ajax="false">Filial Radar</a></li>
+				<li><a href="#storeDetails" data-ajax="false">Filialseite</a></li>
             </ul>
         </div>
 
@@ -111,15 +110,16 @@
     <script type="text/template" id="storeDetails">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Filialseite</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Filialseite". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#storeList">Filialsuchergebnisse</a></li>
+                <li><a href="#storeList" data-ajax="false">Filialsuchergebnisse</a></li>
             </ul>
         </div>
 
@@ -128,16 +128,17 @@
     <script type="text/template" id="storeOffers">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Filial Angebote</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Filial Angebote". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#">Home</a></li>
-				<li><a href="#storeOfferList">Filial Angebotsliste</a></li>
+                <li><a href="#home" data-ajax="false">Home</a></li>
+				<li><a href="#storeOfferList" data-ajax="false">Filial Angebotsliste</a></li>
             </ul>
         </div>
 
@@ -146,16 +147,17 @@
     <script type="text/template" id="storeOfferList">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Filial Angebotsliste</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Filial Angebotsliste". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#storeOffers">Filial Angebote</a></li>
-				<li><a href="#productDetails">Produktdetailseite</a></li>
+                <li><a href="#storeOffers" data-ajax="false">Filial Angebote</a></li>
+				<li><a href="#productDetails" data-ajax="false">Produktdetailseite</a></li>
             </ul>
         </div>
 
@@ -164,16 +166,17 @@
     <script type="text/template" id="productDetails">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Produktdetailseite</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Produktdetailseite". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#storeOfferList">Filial Angebotsliste</a></li>
-				<li><a href="#productDetailsQR">Produkt QR-Code</a></li>
+                <li><a href="#storeOfferList" data-ajax="false">Filial Angebotsliste</a></li>
+				<li><a href="#productDetailsQR" data-ajax="false">Produkt QR-Code</a></li>
             </ul>
         </div>
 
@@ -182,15 +185,16 @@
     <script type="text/template" id="productDetailsQR">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Produkt QR-Code</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Produkt QR-Code". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#productDetails">Produktdetailseite</a></li>
+                <li><a href="#productDetails" data-ajax="false">Produktdetailseite</a></li>
             </ul>
         </div>
 
@@ -199,16 +203,17 @@
     <script type="text/template" id="productSearch">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Artikel Suche</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Artikel Suche". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#">Home</a></li>
-				<li><a href="#productSearchResult">Artikelsuche Ergebnisseite</a></li>
+                <li><a href="#home" data-ajax="false">Home</a></li>
+				<li><a href="#productSearchResult" data-ajax="false">Artikelsuche Ergebnisseite</a></li>
             </ul>
         </div>
 
@@ -217,16 +222,17 @@
     <script type="text/template" id="productSearchResult">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Artikelsuche Ergebnisseite</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Artikelsuche Ergebnisseite". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#productSearch">Artikel Suche</a></li>
-				<li><a href="#productDetails">Produktdetailseite</a></li>
+                <li><a href="#productSearch" data-ajax="false">Artikel Suche</a></li>
+				<li><a href="#productDetails" data-ajax="false">Produktdetailseite</a></li>
             </ul>
         </div>
 
@@ -235,20 +241,21 @@
     <script type="text/template" id="myOmozon">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Mein Omozon</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Mein Omozon". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#">Home</a></li>
-				<li><a href="#myOmozon/stores">Meine Filialen</a></li>
-				<li><a href="#myOmozon/profile">Mein Profil</a></li>
-				<li><a href="#myOmozon/purchases">Meine Kï¿½ufe</a></li>
-				<li><a href="#myOmozon/wishlist">Meine Wunschzettel</a></li>
-				<li><a href="#myOmozon/wallet">Meine Geldbï¿½rse</a></li>
+                <li><a href="#home" data-ajax="false">Home</a></li>
+				<li><a href="#myOmozon/stores" data-ajax="false">Meine Filialen</a></li>
+				<li><a href="#myOmozon/profile" data-ajax="false">Mein Profil</a></li>
+				<li><a href="#myOmozon/purchases" data-ajax="false">Meine Kï¿½ufe</a></li>
+				<li><a href="#myOmozon/wishlist" data-ajax="false">Meine Wunschzettel</a></li>
+				<li><a href="#myOmozon/wallet" data-ajax="false">Meine Geldbï¿½rse</a></li>
             </ul>
         </div>
 
@@ -257,15 +264,16 @@
     <script type="text/template" id="myOmozonStores">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Meine Filialen</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Meine Filialen". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#myOmozon">Mein Omozon</a></li>
+                <li><a href="#myOmozon" data-ajax="false">Mein Omozon</a></li>
             </ul>
         </div>
 
@@ -274,15 +282,16 @@
     <script type="text/template" id="myOmozonProfile">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Mein Profil</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Mein Profil". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#myOmozon">Mein Omozon</a></li>
+                <li><a href="#myOmozon" data-ajax="false">Mein Omozon</a></li>
             </ul>
         </div>
 
@@ -291,15 +300,16 @@
     <script type="text/template" id="myOmozonPurchases">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
-            <h1>Meine Kï¿½ufe</h1>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
+            <h1>Meine Käufe</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Meine Kï¿½ufe". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#myOmozon">Mein Omozon</a></li>
+                <li><a href="#myOmozon" data-ajax="false">Mein Omozon</a></li>
             </ul>
         </div>
 
@@ -308,15 +318,16 @@
     <script type="text/template" id="myOmozonWishlist">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Meine Wunschzettel</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Meine Wunschzettel". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#myOmozon">Mein Omozon</a></li>
+                <li><a href="#myOmozon" data-ajax="false">Mein Omozon</a></li>
             </ul>
         </div>
 
@@ -325,17 +336,18 @@
     <script type="text/template" id="myOmozonWallet">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
-            <h1>Meine Geldbï¿½rse</h1>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
+            <h1>Meine Geldbörse</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Meine Geldbï¿½rse". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#myOmozon">Mein Omozon</a></li>
-				<li><a href="#myOmozon/wallet/voucher">Meine Gutscheine</a></li>
-				<li><a href="#myOmozon/wallet/coins">Meine Omozon Coins</a></li>
+                <li><a href="#myOmozon" data-ajax="false">Mein Omozon</a></li>
+				<li><a href="#myOmozon/wallet/voucher" data-ajax="false">Meine Gutscheine</a></li>
+				<li><a href="#myOmozon/wallet/coins" data-ajax="false">Meine Omozon Coins</a></li>
             </ul>
         </div>
 
@@ -344,15 +356,16 @@
     <script type="text/template" id="myOmozonVoucher">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Meine Gutscheine</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Meine Gutscheine". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#myOmozon/wallet">Mein Geldbï¿½rse</a></li>
+                <li><a href="#myOmozon/wallet" data-ajax="false">Mein Geldbï¿½rse</a></li>
             </ul>
         </div>
 
@@ -361,15 +374,16 @@
     <script type="text/template" id="myOmozonCoins">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Meine Omozon Coins</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Meine Omozon Coins". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#myOmozon/wallet">Mein Geldbï¿½rse</a></li>
+                <li><a href="#myOmozon/wallet" data-ajax="false">Mein Geldbï¿½rse</a></li>
             </ul>
         </div>
 
@@ -378,15 +392,16 @@
     <script type="text/template" id="onlineshop">
 
         <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a><a href="#logout" data-icon="back" class="back ui-btn-right">logout</a>
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
             <h1>Onlineshop</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
         </div>
 
         <div data-role="content">
             <p>This is Page "Onlineshop". It was created dynamically using an underscore.js template.</p>
             <p>Navigate to:</p>
             <ul data-role="listview" data-inset="true">
-                <li><a href="#">Home</a></li>
+                <li><a href="#home" data-ajax="false">Home</a></li>
             </ul>
         </div>
 
@@ -395,7 +410,10 @@
     <!-- The Scripts -->
     <script src="lib/gserializer.js"></script>
     <script src="lib/jquery-1.7.1.min.js"></script>
+<!--     <script src="lib/jquery-1.11.0.js"></script> -->
+<!--     <script src="lib/jquery-migrate-1.2.1.js"></script> -->
     <script src="lib/jquery.mobile-1.0.1.min.js"></script>
+<!--     <script src="lib/jquery.mobile-1.4.2.min.js"></script> -->
     <script src="lib/jquery.session.js"></script>
     <!--script src="lib/underscore-min.js"></script-->
     <script src="lib/underscore.js"></script>
@@ -404,11 +422,10 @@
     <script src="lib/backbone.basicauth.js"></script>
     
     <script src="js/jqm-config.js"></script>
-    <script src="js/model/Person.js"></script>
     <script src="js/model/User.js"></script>
     <script src="js/main.js"></script>
 </head>
-
+<!-- <a href="#logout" data-icon="back" class="back ui-btn-right">logout</a> -->
 <body></body>
 
 </html>
