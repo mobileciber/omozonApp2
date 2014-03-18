@@ -33,3 +33,12 @@ http://www.html5rocks.com/en/tutorials/cors/
 http://enable-cors.org/
 http://chstrongjavablog.blogspot.de/2013/04/enabling-cors-for-jetty.html
 http://blog.safaribooksonline.com/2013/05/16/angularjs-ngresource-tips-and-tricks/
+
+Form and Data handling:
+http://www.jquery4u.com/bootstraps/jquery-backbone-forms-codedemos/
+http://jqueryvalidation.org/documentation => jquery not fitting lifecycle
+http://thedersen.com/projects/backbone-validation/
+http://beletsky.net/2012/11/baby-steps-to-backbonejs-model.html
+
+Two way data binding
+http://nytimes.github.io/backbone.stickit/

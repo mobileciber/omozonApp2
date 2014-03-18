@@ -12,12 +12,12 @@
 window.HomeView = Backbone.View.extend({
     // 'this' means 'window', which is the default global object
     // 'bindAll' uses 'bind' internally and 'bind' uses 'apply', which sets the value for 'this'
-//	initialize: function() {
+	initialize: function() {
 //        _.bindAll(this, "render");
 //        this.model.bind("change", this.render);
 //        this.model.fetch();
 //		return $(this.el).trigger('create');
-//    },
+    },
     
     render:function () {
 //        var greeting = 'Hello ' + this.options.name + ' (' + this.options.age + '), father of ' + this.options.child;
@@ -40,6 +40,7 @@ window.LoginView = Backbone.View.extend({
 
     initialize:function () {
         console.log('Initializing Login View');
+//        Backbone.Validation.bind(this);
     },
 
     events: {
@@ -57,6 +58,16 @@ window.LoginView = Backbone.View.extend({
     	var self = this;
     	var username = $('#inputEmail').val();
     	var password = $('#inputPassword').val();
+    	
+    	var loginForm = new LoginForm({inputEmail: username, inputPassword: password});
+    	if (!loginForm.isValid()) {
+    		event.preventDefault(); // stops further event propagation
+    		alert(loginForm.validationError);
+    	} else{ // SPA´s load a page only once initially. Inserted data has to be cleaned up!
+	    	$('#inputEmail').val('');
+	    	$('#inputPassword').val('');
+    	}
+    	
     	var user = new User({id: username});
 		user.credentials = function(){
 			return {
