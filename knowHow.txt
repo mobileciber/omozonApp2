@@ -42,3 +42,6 @@ http://beletsky.net/2012/11/baby-steps-to-backbonejs-model.html
 
 Two way data binding
 http://nytimes.github.io/backbone.stickit/
+
+jQuery Mobile:
+http://stackoverflow.com/questions/14468659/jquery-mobile-document-ready-vs-page-events

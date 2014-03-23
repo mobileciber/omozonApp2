@@ -4,9 +4,15 @@ $(document).bind("mobileinit", function () {
     $.mobile.listview.prototype.options.icon = "";
     $.mobile.hashListeningEnabled = false;
     $.mobile.pushStateEnabled = false;
+});
 
-    // Remove page from DOM when it's being replaced
-    $('div[data-role="page"]').live('pagehide', function (event, ui) {
+$(document).bind( "pagechange", function( e, data ) {
+	// Remove page from DOM when it's being replaced => doesn´t work when bound with [$(document).bind("mobileinit",...]
+	// @ToDo: let jquery mobile work in a div, then it manages replacement without this tweak
+	// => http://demos.jquerymobile.com/1.1.1/docs/pages/page-dynamic.html
+	// Event "pagehide" is depricated and will be removed in JQM 1.5
+	// NEW impl: http://api.jquerymobile.com/pagecontainer/
+	$('div[data-role="page"]').on('pagehide', function (event, ui) {
         $(event.currentTarget).remove();
     });
 });

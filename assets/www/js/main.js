@@ -455,12 +455,6 @@ var AppRouter = Backbone.Router.extend({
             this.firstPage = false;
         }
         $.mobile.changePage($(page.el), {changeHash:false, transition: transition});
-        
-        // Remove page from DOM when it's being replaced => doesn´t work when bound with [$(document).bind("mobileinit",...]
-		// @ToDo: let jquery mobile work in a div, then it manages replacement without this tweak
-        $('div[data-role="page"]').on('pagehide', function (event, ui) {
-            $(event.currentTarget).remove();
-        });
     }
 
 });
