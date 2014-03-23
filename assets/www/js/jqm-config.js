@@ -14,14 +14,15 @@ $(document).bind("mobileinit", function () {
 // Check with following link for more jquery page lifecycle events
 // http://www.gajotres.net/page-events-order-in-jquery-mobile/
 $(document).on('pagebeforecreate', '[data-role="page"]', function(){    
-    console.log(window.location + ", " + document.URL + " - pagebeforecreate!!");
+    console.log(window.location + " - pagebeforecreate!!");
 //    console.log($.session.get('userdata') + " - pagebeforecreate!!");
     if(typeof $.session.get('userdata') == 'undefined'){
     	console.log('No session user...');
     	// we don´t want a redirect in case of loading the login or on logout page
-    	if(window.location.hash != 'login' && window.location.hash != 'logout'){
+    	console.log(window.location.hash + " - pagebeforecreate!!");
+    	if(window.location.hash != '#login' /*&& window.location.hash != '#logout'*/){
     		console.log('Redirect to login...');
-    		window.location.hash = 'login';
+    		window.location.hash = '#login';
     	}
 	}
 });
@@ -32,17 +33,17 @@ $.ajaxSetup({
     	404: function(){ // @ToDo: replace with a sorry page
             // Redirec the to the login page.
         	$.session.remove('userdata');
-        	window.location.hash = 'login';
+        	window.location.hash = '#login';
         },
     	401: function(){
             // Redirec the to the login page.
         	$.session.remove('userdata');
-        	window.location.hash = 'login';
+        	window.location.hash = '#login';
         },
         403: function() {
             // 403 -- Access denied
         	$.session.remove('userdata');
-        	window.location.hash = 'login';
+        	window.location.hash = '#login';
         }
     }
 });
