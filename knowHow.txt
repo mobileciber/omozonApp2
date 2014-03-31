@@ -45,3 +45,6 @@ http://nytimes.github.io/backbone.stickit/
 
 jQuery Mobile:
 http://stackoverflow.com/questions/14468659/jquery-mobile-document-ready-vs-page-events
+
+weinre:
+http://people.apache.org/~pmuellr/weinre/docs/latest/Home.html
