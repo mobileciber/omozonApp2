@@ -17,6 +17,11 @@ $(document).bind( "pagechange", function( e, data ) {
     });
 });
 
+//Listen for any attempts to call changePage(). => redirect to login
+//$(document).bind( "pagebeforechange", function( e, data ) {
+//	alert("pagebeforechange");
+//});
+
 // Check with following link for more jquery page lifecycle events
 // http://www.gajotres.net/page-events-order-in-jquery-mobile/
 $(document).on('pagebeforecreate', '[data-role="page"]', function(){    

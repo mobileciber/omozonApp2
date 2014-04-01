@@ -23,7 +23,7 @@ window.HomeView = Backbone.View.extend({
 //        var greeting = 'Hello ' + this.options.name + ' (' + this.options.age + '), father of ' + this.options.child;
 //    	this.options keeps all parameters with which the view was instanciated
     	var sessionUser = $.parseJSON($.session.get('userdata'));
-    	var greeting = 'Hello ';// + sessionUser.name;
+    	var greeting = 'Hello ' + sessionUser.name;
         //Pass variables in using Underscore.js Template
         var variables = { myGreeting: greeting };
         // Compile the template using underscore
@@ -62,19 +62,13 @@ window.LoginView = Backbone.View.extend({
     	
     	var username = $('#inputEmail').val(); // attr('value') and val() retrieve the original value and prop('value') the current
     	var password = $('#inputPassword').val();
-    	alert(username + " : " + password);
+//    	alert(username + " : " + password);
     	
     	var loginForm = new LoginForm({inputEmail: username, inputPassword: password});
     	if (!loginForm.isValid()) {
     		event.preventDefault(); // stops further event propagation
     		alert(loginForm.validationError);
     	}
-//    	else{ // SPA´s load a page only once initially. Inserted data has to be explicitly cleaned up!
-////	    	$('#inputEmail').val('');
-////	    	$('#inputPassword').val('');
-//    		$('#inputEmail').attr('value', '');
-//        	$('#inputPassword').attr('value', '');
-//    	}
     	
     	var user = new User({id: username});
 		user.credentials = function(){
