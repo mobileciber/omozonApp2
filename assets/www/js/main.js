@@ -11,11 +11,12 @@
 
 window.HomeView = Backbone.View.extend({
     // 'this' means 'window', which is the default global object
-    // 'bindAll' uses 'bind' internally and 'bind' uses 'apply', which sets the value for 'this'
+    // 'bindAll' uses 'bind' internally and 'bind' uses 'apply', which sets an object as the value for 'this'
 	initialize: function() {
 //        _.bindAll(this, "render");
 //        this.model.bind("change", this.render);
 //        this.model.fetch();
+//		return $(this.el).trigger('create');
     },
     
     render:function () {
@@ -30,25 +31,23 @@ window.HomeView = Backbone.View.extend({
         // Load the compiled HTML into the Backbone "el"
         $(this.el).html( template );
 //      fire the JQM create trigger to refresh the page
-        return $(this.el).trigger('create');
+//        return $(this.el).trigger('create');
+        return this;
     }
-    
-//    
-//
-//    render: function() {
-//        $(this.el).html(Mustache.to_html($('#template').html(), this.model.toJSON());
-//        return this;
-//    }
 });
 
 window.LoginView = Backbone.View.extend({
 
     initialize:function () {
         console.log('Initializing Login View');
+//        $('#inputEmail').val('');
+//        $('#inputPassword').val('');
+//        Backbone.Validation.bind(this);
     },
 
     events: {
-        "click #loginButton": "login"
+//        "click #loginButton": "login"
+    	"submit form#loginForm": "login"
     },
 
     template:_.template($('#login').html()),
@@ -60,8 +59,17 @@ window.LoginView = Backbone.View.extend({
 
     login:function (event) {
     	var self = this;
-    	var username = $('#inputEmail').val();
+    	
+    	var username = $('#inputEmail').val(); // attr('value') and val() retrieve the original value and prop('value') the current
     	var password = $('#inputPassword').val();
+//    	alert(username + " : " + password);
+    	
+    	var loginForm = new LoginForm({inputEmail: username, inputPassword: password});
+    	if (!loginForm.isValid()) {
+    		event.preventDefault(); // stops further event propagation
+    		alert(loginForm.validationError);
+    	}
+    	
     	var user = new User({id: username});
 		user.credentials = function(){
 			return {
@@ -69,28 +77,22 @@ window.LoginView = Backbone.View.extend({
 				password: password
 			};
 		};
-		console.log(username + " / " + password);
 		user.fetch({
-//				data: {},
 				success: function (usermodel, response, options) {
 					usermodel.set({ username: username, password: password});
-					console.log('Put user in session: ' + JSON.stringify(usermodel.toJSON()));
 					$.session.set('userdata', JSON.stringify(usermodel.toJSON()));
-					
 					console.log(usermodel.get('name') + " has signed on");
-					console.log(usermodel.get('username') + " / " + usermodel.get('password'));
-					self.redirect(usermodel);
+//					self.redirect();
                 },
                 error:function (model, xhr, options) {
-                	console.log('error arguments: ', arguments);
-//                	var serializer = new ONEGEEK.GSerializer();
-//                	var serializedObj = serializer.serialize(options, 'model');
-//                	console.log('Remove user from session...' + serializedObj);
+                	console.log('error arguments: ', options);
+                	console.log('Remove user from session...');
                 	$.session.remove('userdata');
-//                    alert(' Service request failure: ' + e);
                 },
                 complete: function(xhr, textStatus) {
                 	console.log('fetch status: ' + textStatus);
+                	username = '';
+                	password = '';
                 }
 		});
 //		.complete(function () {
@@ -98,8 +100,9 @@ window.LoginView = Backbone.View.extend({
 //	    });
     },
     
-    redirect: function(usermodel){
-    	app.changePage(new HomeView());
+    redirect: function(){
+//    	app.changePage(new HomeView());
+//    	app.navigate('home', {trigger: true});
     }
 });
 
@@ -297,6 +300,7 @@ var AppRouter = Backbone.Router.extend({
 
     routes:{
         "":"home",
+        "home":"home",
         "login":"login",
         "logout":"logout",
         "stores":"stores",
@@ -330,32 +334,7 @@ var AppRouter = Backbone.Router.extend({
 
     home:function () {
         console.log('#home');
-//        var user = new User();
-//        user.set({id: 'freddy'}); // without an id backbone will not fetch data from backend
-//        
-//        var username = '';
-//        var password = '';
-        
-        if(typeof $.session.get('userdata') != 'undefined'){
-        	var sessionUser = $.parseJSON($.session.get('userdata'));
-        	console.log('User from JSON: ' + sessionUser.name);
-        	var user = new User();
-        	user.set({id: sessionUser.username});
-        	username = sessionUser.username;
-            password = sessionUser.password;
-            console.log(username + " / " + password);    		
-        } 
-//        else{
-//        	this.changePage(new LoginView());
-//        }
         this.changePage(new HomeView());
-//        user.credentials = function(){
-//			return {
-//				username: username,
-//				password: password
-//			};
-//		};
-//        this.changePage(new HomeView({model : user}));
     },
     
     login: function() {
