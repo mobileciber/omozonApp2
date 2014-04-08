@@ -38,6 +38,20 @@ $(document).on('pagebeforecreate', '[data-role="page"]', function(){
 	}
 });
 
+$(document).bind('pageinit', function(event) {
+//	alert('pageinit');
+	$('loginForm').validate({
+		rules: {
+			inputEmail: {
+				required: true
+			},
+			inputPassword: {
+				required: true
+			}
+		}
+	});
+});
+
 // Tell jQuery to watch for any 401 or 403 errors and handle them appropriately
 $.ajaxSetup({
     statusCode: {

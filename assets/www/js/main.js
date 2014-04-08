@@ -64,11 +64,24 @@ window.LoginView = Backbone.View.extend({
     	var password = $('#inputPassword').val();
 //    	alert(username + " : " + password);
     	
-    	var loginForm = new LoginForm({inputEmail: username, inputPassword: password});
-    	if (!loginForm.isValid()) {
-    		event.preventDefault(); // stops further event propagation
-    		alert(loginForm.validationError);
-    	}
+//    	var loginForm = new LoginForm({inputEmail: username, inputPassword: password});
+//    	if (!loginForm.isValid()) {
+//    		event.preventDefault(); // stops further event propagation
+//    		alert(loginForm.validationError);
+//    	}
+    	
+//    	var validator = $('loginForm').validate({
+//    		rules: {
+//    			inputEmail: {
+//    				required: true
+//    			},
+//    			inputPassword: {
+//    				required: true
+//    			}
+//    		}
+//    	});
+//    	validator.form();
+//    	alert(validator.numberOfInvalids());
     	
     	var user = new User({id: username});
 		user.credentials = function(){
