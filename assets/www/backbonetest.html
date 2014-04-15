@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/jquery.mobile-1.4.2.css"/>
+<title>Insert title here</title>
+
+<script src="lib/jquery-1.7.1.min.js"></script>
+<script src="lib/jquery.mobile-1.4.2.js"></script>
+<script src="lib/underscore.js"></script>
+<script src="lib/backbone.js"></script>
+<script src="lib/backbone-validation-0.9.1.min.js"></script>
+
+<script type="text/template" id="home_template">
+	<div data-role="header"><h1>Willkommen</h1></div> 
+	<div data-role="content"> <h2>Inhaltslos</h2> <p>Keiner denkt an den <strong>Inhalt</strong></p> </div> 
+	<div data-role="footer">
+		<div data-role="navbar"> 
+		<ul>
+			<li><a href="#home" data-iconpos="top" data-icon="home" data-ajax="false">HOME</a></li>
+			<li><a href="#search" data-iconpos="top" data-icon="search" data-ajax="false">SEARCH</a></li>
+		</ul>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="search_template">
+	<div data-role="header"><h1>Suche</h1></div> 
+	<div data-role="content">
+		<input type="text" id="search_input" />
+		<input type="button" id="search_button" value="Search" /><br/><br/>
+	</div> 
+	<div data-role="footer">
+		<div data-role="navbar"> 
+		<ul>
+			<li><a href="#home" data-iconpos="top" data-icon="home" data-ajax="false">HOME</a></li>
+			<li><a href="#search" data-iconpos="top" data-icon="search" data-ajax="false">SEARCH</a></li>
+		</ul>
+		</div>
+	</div>
+</script>
+
+<script type='text/javascript'>//<![CDATA[ 
+
+HomeView = Backbone.View.extend({
+//     initialize: function(){
+//         this.render();
+//     },
+//     render: function(){
+//         // Compile the template using underscore
+//         var template = _.template( $("#home_template").html(), {} );
+//         // Load the compiled HTML into the Backbone "el"
+//         this.$el.html( template );
+//     }
+
+    render:function (eventName) {
+    	var template = _.template( $("#home_template").html(), {} );
+//     	this.$el.html( template );
+    	$(this.el).html(template);
+    }
+});
+                                          
+SearchView = Backbone.View.extend({
+//     initialize: function(){
+//         this.render();
+//     },
+//     render: function(){
+//         // Compile the template using underscore
+//         var template = _.template( $("#search_template").html(), {} );
+//         // Load the compiled HTML into the Backbone "el"
+//         this.$el.html( template );
+//     }
+
+    render:function (eventName) {
+    	var template = _.template( $("#search_template").html(), {} );
+//     	this.$el.html( template );
+    	$(this.el).html(template);
+    }
+});
+
+var AppRouter = Backbone.Router.extend({
+	routes:{
+        "":"home",
+        "home":"home",
+        "search":"search"
+	},
+	
+	home: function(){
+// 		var search_view = new HomeView({ el: $("body") });
+		console.log('#home');
+        this.changePage(new HomeView());
+	}, 
+	
+	search: function(){
+// 		var search_view = new SearchView({ el: $("body") });
+		console.log('#search');
+        this.changePage(new SearchView());
+	},
+	
+	changePage:function (page) {
+        $(page.el).attr('data-role', 'page');
+        page.render();
+        $("body").append($(page.$el));
+        var transition = $.mobile.defaultPageTransition;
+        $.mobile.changePage($(page.el), {changeHash:false, transition: transition});
+		// Remove page from DOM when it's being replaced => doesn´t work when bound with [$(document).bind("mobileinit",...]
+//         $('div[data-role="page"]').on('pagehide', function (event, ui) {
+//             $(event.currentTarget).remove();
+//         });
+    }
+});
+
+$(document).bind("mobileinit", function () {
+    $.mobile.ajaxEnabled = false;
+    $.mobile.linkBindingEnabled = false;
+    $.mobile.listview.prototype.options.icon = "";
+    $.mobile.hashListeningEnabled = false;
+    $.mobile.pushStateEnabled = false;
+    $.mobile.pageLoading( true );
+});
+
+//Listen for any attempts to call changePage().
+// $(document).bind( "pagebeforechange", function( e, data ) {
+// 	alert("pagebeforechange");
+// });
+
+$(document).bind( "pagechange", function( e, data ) {
+	// Remove page from DOM when it's being replaced => doesn´t work when bound with [$(document).bind("mobileinit",...]
+	// @ToDo: let jquery mobile work in a div, then it manages replacement without this tweak
+	// => http://demos.jquerymobile.com/1.1.1/docs/pages/page-dynamic.html
+	// Event "pagehide" is depricated and will be removed in JQM 1.5
+	// NEW impl: http://api.jquerymobile.com/pagecontainer/
+	$('div[data-role="page"]').on('pagehide', function (event, ui) {
+        $(event.currentTarget).remove();
+    });
+});
+
+// $(document).bind( "pageinit", function( e, data ) {
+// 	alert("pageinit: " + data);
+// });
+
+$(document).ready(function(){
+app = new AppRouter();
+Backbone.history.start();
+});//]]> 
+</script>
+</head>
+<body>
+	
+</body>
+</html>

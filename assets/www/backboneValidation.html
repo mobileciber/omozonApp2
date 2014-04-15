@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/jquery.mobile-1.4.2.css"/>
+<title>Insert title here</title>
+
+<script type='text/javascript' src="lib/jquery-1.11.0.js"></script>
+<script type='text/javascript' src="lib/jquery.mobile-1.4.2.js"></script>
+<script type='text/javascript' src="lib/underscore.js"></script>
+<script type='text/javascript' src="lib/backbone.js"></script>
+<script type='text/javascript' src="lib/backbone-validation-0.9.1.min.js"></script>
+
+<script type="text/template" id="home_template">
+	<div data-role="header"><h1>Willkommen</h1></div> 
+	<div data-role="content"> <h2>Inhaltslos</h2> <p>Keiner denkt an den <strong>Inhalt</strong></p> </div> 
+	<div data-role="footer">
+		<div data-role="navbar"> 
+		<ul>
+			<li><a href="#home" data-iconpos="top" data-icon="home" data-ajax="false">HOME</a></li>			
+			<li><a href="#login" data-iconpos="top" data-icon="check" data-ajax="false">LOGIN</a></li>
+			<li><a href="#search" data-iconpos="top" data-icon="search" data-ajax="false">SEARCH</a></li>
+		</ul>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="search_template">
+	<div data-role="header"><h1>Suche</h1></div> 
+	<div data-role="content">
+		<input type="text" id="search_input" />
+		<input type="button" id="search_button" value="Search" /><br/><br/>
+	</div> 
+	<div data-role="footer">
+		<div data-role="navbar"> 
+		<ul>
+			<li><a href="#home" data-iconpos="top" data-icon="home" data-ajax="false">HOME</a></li>
+			<li><a href="#login" data-iconpos="top" data-icon="check" data-ajax="false">LOGIN</a></li>
+			<li><a href="#search" data-iconpos="top" data-icon="search" data-ajax="false">SEARCH</a></li>
+		</ul>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="login_template">
+	<div data-role="header">
+            <h1>Login</h1>
+        </div>
+
+        <div data-role="content">
+			<div class="alert alert-error" style="display:none;"></div>
+			<form id="loginForm" class="form-horizontal" autocomplete="off">
+				<div class="control-group">
+					<label class="control-label" for="inputUser">User</label>
+					<div class="controls">
+						<input type="text" id="inputUser" value="" placeholder="User">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputPassword">Password</label>
+					<div class="controls">
+						<input type="password" id="inputPassword" value="" placeholder="Password">
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn" id="loginButton">Sign in</button>
+					</div>
+				</div>
+			</form>
+        </div> 
+	<div data-role="footer">
+		<div data-role="navbar"> 
+		<ul>
+			<li><a href="#home" data-iconpos="top" data-icon="home" data-ajax="false">HOME</a></li>
+			<li><a href="#login" data-iconpos="top" data-icon="check" data-ajax="false">LOGIN</a></li>
+			<li><a href="#search" data-iconpos="top" data-icon="search" data-ajax="false">SEARCH</a></li>
+		</ul>
+		</div>
+	</div>
+</script>
+
+<script type='text/javascript'>//<![CDATA[ 
+
+HomeView = Backbone.View.extend({
+//     initialize: function(){
+//         
+//     },
+
+    render:function (eventName) {
+    	var template = _.template( $("#home_template").html(), {} );
+    	$(this.el).html(template);
+    }
+});
+                                          
+SearchView = Backbone.View.extend({
+//     initialize: function(){
+//         
+//     },
+
+    render:function (eventName) {
+    	var template = _.template( $("#search_template").html(), {} );
+    	$(this.el).html(template);
+    }
+});
+
+LoginView = Backbone.View.extend({
+     initialize: function(){
+         Backbone.Validation.bind(this);
+     },
+     
+     events: {
+    	"click #loginButton" : function(e){
+    		this.login(e);
+    	}
+    },
+    
+    login:function (e) {
+    	var self = this;
+    	
+//    	var inputUser = $('#inputUser').val(); // attr('value') and val() retrieve the original value and prop('value') the current
+//    	var inputPassword = $('#inputPassword').val();
+    	this.model.set({inputUser: $('#inputUser').val(), inputPassword: $('#inputPassword').val()});
+    	
+    	alert(this.model.get("inputUser") + " : " + this.model.get("inputPassword"));
+    	
+    	if (this.model.isValid(true)) {
+    		alert("Validation successful...");
+    	} else{
+    		e.preventDefault(); // stops further event propagation
+    		alert("Validation failed...");
+    	}
+    },
+
+    render:function (eventName) {
+    	var template = _.template( $("#login_template").html(), {} );
+    	$(this.el).html(template);
+    }
+});
+
+var LoginFormModel = Backbone.Model.extend({
+	validation: {
+		inputUser: {
+	      required: true,
+	      msg: 'Please enter an email address'
+	    },
+	    inputPassword: {
+	    		required: true,
+	    		msg: 'Please enter a password'
+		    }
+	  },
+	
+	defaults: {
+		'inputUser': '',
+		'inputPassword': ''
+
+	}
+});
+
+var AppRouter = Backbone.Router.extend({
+	routes:{
+        "":"home",
+        "home":"home",
+        "search":"search",
+        "login":"login"
+	},
+	
+	home: function(){
+		console.log('#home');
+        this.changePage(new HomeView());
+	}, 
+	
+	search: function(){
+		console.log('#search');
+        this.changePage(new SearchView());
+	},
+	
+	login: function(){
+		console.log('#search');
+        this.changePage(new LoginView({model: new LoginFormModel()}));
+	},
+	
+	changePage:function (page) {
+        $(page.el).attr('data-role', 'page');
+        page.render();
+        $("body").append($(page.$el));
+        var transition = $.mobile.defaultPageTransition;
+        $.mobile.changePage($(page.el), {changeHash:false, transition: transition});
+    }
+});
+
+$(document).bind("mobileinit", function () {
+    $.mobile.ajaxEnabled = false;
+    $.mobile.linkBindingEnabled = false;
+    $.mobile.listview.prototype.options.icon = "";
+    $.mobile.hashListeningEnabled = false;
+    $.mobile.pushStateEnabled = false;
+    $.mobile.pageLoading( true );
+});
+
+$(document).bind( "pagechange", function( e, data ) {
+	// Remove page from DOM when it's being replaced => doesn´t work when bound with [$(document).bind("mobileinit",...]
+	// @ToDo: let jquery mobile work in a div, then it manages replacement without this tweak
+	// => http://demos.jquerymobile.com/1.1.1/docs/pages/page-dynamic.html
+	// Event "pagehide" is depricated and will be removed in JQM 1.5
+	// NEW impl: http://api.jquerymobile.com/pagecontainer/
+	$('div[data-role="page"]').on('pagehide', function (event, ui) {
+        $(event.currentTarget).remove();
+    });
+});
+
+$(document).ready(function(){
+app = new AppRouter();
+Backbone.history.start();
+});//]]> 
+</script>
+</head>
+<body>
+	
+</body>
+</html>

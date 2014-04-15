@@ -1,3 +1,5 @@
+//_.extend(Backbone.Model.prototype, Backbone.Validation.mixin);
+
 //window.HomeView = Backbone.View.extend({
 //    // 'this' means 'window', which is the default global object
 //    // 'bindAll' uses 'bind' internally and 'bind' uses 'apply', which sets the value for 'this'
@@ -23,7 +25,7 @@ window.HomeView = Backbone.View.extend({
 //        var greeting = 'Hello ' + this.options.name + ' (' + this.options.age + '), father of ' + this.options.child;
 //    	this.options keeps all parameters with which the view was instanciated
     	var sessionUser = $.parseJSON($.session.get('userdata'));
-    	var greeting = 'Hello ' + (sessionUser != undefined && sessionUser.name != undefined) ? sessionUser.name : '';
+    	var greeting = 'Hello ' + sessionUser.name;
         //Pass variables in using Underscore.js Template
         var variables = { myGreeting: greeting };
         // Compile the template using underscore
@@ -40,14 +42,19 @@ window.LoginView = Backbone.View.extend({
 
     initialize:function () {
         console.log('Initializing Login View');
-//        $('#inputEmail').val('');
+//        $('#inputUser').val('');
 //        $('#inputPassword').val('');
-//        Backbone.Validation.bind(this);
+//        var loginFormModel = new LoginForm({inputUser: "", inputPassword: ""});
+//        Backbone.Validation.bind(this, {
+//            model: loginFormModel
+//        });
     },
 
     events: {
-//        "click #loginButton": "login"
-    	"submit form#loginForm": "login"
+//    	"submit form#loginForm": "login"
+    	"click #loginButton" : function(e){
+    		this.login(e);
+    	}
     },
 
     template:_.template($('#login').html()),
@@ -57,24 +64,18 @@ window.LoginView = Backbone.View.extend({
         return this;
     },
 
-    login:function (event) {
+    login:function (e) {
     	var self = this;
     	
-    	var username = $('#inputEmail').val(); // attr('value') and val() retrieve the original value and prop('value') the current
+    	var username = $('#inputUser').val(); // attr('value') and val() retrieve the original value and prop('value') the current
     	var password = $('#inputPassword').val();
     	alert(username + " : " + password);
     	
-    	var loginForm = new LoginForm({inputEmail: username, inputPassword: password});
+    	var loginForm = new LoginForm({inputUser: username, inputPassword: password});
     	if (!loginForm.isValid()) {
-    		event.preventDefault(); // stops further event propagation
+    		e.preventDefault(); // stops further event propagation
     		alert(loginForm.validationError);
     	}
-//    	else{ // SPA´s load a page only once initially. Inserted data has to be explicitly cleaned up!
-////	    	$('#inputEmail').val('');
-////	    	$('#inputPassword').val('');
-//    		$('#inputEmail').attr('value', '');
-//        	$('#inputPassword').attr('value', '');
-//    	}
     	
     	var user = new User({id: username});
 		user.credentials = function(){
