@@ -18,7 +18,7 @@ var LoginForm = Backbone.Model.extend({
 //	  }
 	
 	defaults: {
-		'inputEmail': '',
+		'inputUser': '',
 		'inputPassword': ''
 
 	},
