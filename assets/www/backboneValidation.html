@@ -49,19 +49,20 @@
         </div>
 
         <div data-role="content">
-			<div class="alert alert-error" style="display:none;"></div>
 			<form id="loginForm" class="form-horizontal" autocomplete="off">
 				<div class="control-group">
 					<label class="control-label" for="inputUser">User</label>
 					<div class="controls">
 						<input type="text" id="inputUser" value="" placeholder="User">
 					</div>
+					<div id="err_inputUser" class="alert alert-error" />
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="inputPassword">Password</label>
 					<div class="controls">
 						<input type="password" id="inputPassword" value="" placeholder="Password">
 					</div>
+					<div id="err_inputPassword" class="alert alert-error" />
 				</div>
 				<div class="control-group">
 					<div class="controls">
@@ -107,7 +108,17 @@ SearchView = Backbone.View.extend({
 
 LoginView = Backbone.View.extend({
      initialize: function(){
-         Backbone.Validation.bind(this);
+         Backbone.Validation.bind(this, {
+	         	valid: function(view, attr) {
+	         		$('#err_' + attr).html('').hide();
+	        		//alert("Callback: Validation successful..." + attr);
+	      		},
+	      		invalid: function(view, attr, error) {
+	      			$("#err_" + attr).html(error).show();
+	        		//alert("Callback: Validation failed for attribute: " + attr + ", error: " + error);
+	      		}
+      		}
+         );
      },
      
      events: {
