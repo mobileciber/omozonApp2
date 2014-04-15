@@ -23,7 +23,7 @@ window.HomeView = Backbone.View.extend({
 //        var greeting = 'Hello ' + this.options.name + ' (' + this.options.age + '), father of ' + this.options.child;
 //    	this.options keeps all parameters with which the view was instanciated
     	var sessionUser = $.parseJSON($.session.get('userdata'));
-    	var greeting = 'Hello ';// + sessionUser.name;
+    	var greeting = 'Hello ' + (sessionUser != undefined && sessionUser.name != undefined) ? sessionUser.name : '';
         //Pass variables in using Underscore.js Template
         var variables = { myGreeting: greeting };
         // Compile the template using underscore
@@ -83,6 +83,7 @@ window.LoginView = Backbone.View.extend({
 				password: password
 			};
 		};
+		console.log('trying to fetch user with name: ' + username);
 		user.fetch({
 				success: function (usermodel, response, options) {
 					usermodel.set({ username: username, password: password});
