@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 var User = Backbone.Model.extend({
-	urlRoot: 'http://192.168.2.114:8484/hybridmobile-backend/api/customers',
+	urlRoot: 'http://192.168.0.101:8484/hybridmobile-backend/api/customers',
 //	urlRoot: 'http://freddy:krueger@192.168.0.104:8484/hybridmobile-backend/api/customers',
 
     defaults: {

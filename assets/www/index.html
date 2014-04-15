@@ -35,22 +35,22 @@
 
         <div data-role="content">
 			<div class="alert alert-error" style="display:none;"></div>
-			<form id="loginForm" method="GET" class="form-horizontal" autocomplete="off">
-				<div class="control-group" data-role="fieldcontain">
-					<label class="control-label" for="inputEmail">User</label>
+			<form id="loginForm" class="form-horizontal" autocomplete="off">
+				<div class="control-group">
+					<label class="control-label" for="inputUser">User</label>
 					<div class="controls">
-						<input type="text" id="inputEmail" name="inputEmail" value="" placeholder="User">
+						<input type="text" id="inputUser" value="" placeholder="User">
 					</div>
 				</div>
-				<div class="control-group" data-role="fieldcontain">
+				<div class="control-group">
 					<label class="control-label" for="inputPassword">Password</label>
 					<div class="controls">
-						<input type="password" id="inputPassword" name="inputPassword" value="" placeholder="Password">
+						<input type="password" id="inputPassword" value="" placeholder="Password">
 					</div>
 				</div>
 				<div class="control-group">
 					<div class="controls">
-						<button type="submit" class="btn" id="loginButton"  data-role="submit">Sign in</button>
+						<button type="submit" class="btn" id="loginButton">Sign in</button>
 					</div>
 				</div>
 			</form>
@@ -414,19 +414,19 @@
     <script src="lib/jquery.mobile-1.0.1.min.js"></script>
 <!--     <script src="lib/jquery.mobile-1.4.2.min.js"></script> -->
     <script src="lib/jquery.session.js"></script>
-    <script src="lib/jquery.validate.js"></script>
+    <!--script src="lib/jquery.validate.js"></script-->
     <!--script src="lib/underscore-min.js"></script-->
     <script src="lib/underscore.js"></script>
     <!--script src="lib/backbone-min.js"></script-->
     <script src="lib/backbone.js"></script>
     <script src="lib/backbone.basicauth.js"></script>
-<!--     <script src="lib/backbone-validation-0.9.1.min.js"></script> -->
-    
+	<!--script src="lib/backbone-validation-0.9.1.min.js"></script-->
+
     <script src="js/jqm-config.js"></script>
     <script src="js/model/User.js"></script>
     <script src="js/model/LoginForm.js"></script>
     <script src="js/main.js"></script>
-    <script src="http://192.168.2.107:8080/target/target-script-min.js#uniqueId"></script>
+    <!--script src="http://192.168.0.101:8080/target/target-script-min.js#uniqueId"></script-->
 </head>
 <!-- <a href="#logout" data-icon="back" class="back ui-btn-right">logout</a> -->
 <body></body>
