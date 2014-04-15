@@ -1,7 +1,7 @@
 var LoginForm = Backbone.Model.extend({
 	// this code requies Backbone.Validation plugin
 //	validation: {
-//		inputUser: [{
+//		inputEmail: [{
 //	      required: true,
 //	      msg: 'Please enter an email address'
 //	    },{
@@ -15,17 +15,17 @@ var LoginForm = Backbone.Model.extend({
 //		    	length: 4,
 //		    	msg: 'Please enter a password longer than 4 characters'
 //		    }]
-//	  },
+//	  }
 	
 	defaults: {
-		'inputUser': '',
+		'inputEmail': '',
 		'inputPassword': ''
 
 	},
 	
 	validate: function (attrs, options) {
-		if (!attrs.inputUser) {
-			return 'Please fill user field.';
+		if (!attrs.inputEmail) {
+			return 'Please fill email field.';
 		}
 		if (!attrs.inputPassword) {
 			return 'Please fill password field.';

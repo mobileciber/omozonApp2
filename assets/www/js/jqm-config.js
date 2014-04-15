@@ -17,11 +17,6 @@ $(document).bind( "pagechange", function( e, data ) {
     });
 });
 
-//Listen for any attempts to call changePage(). => redirect to login
-//$(document).bind( "pagebeforechange", function( e, data ) {
-//	alert("pagebeforechange");
-//});
-
 // Check with following link for more jquery page lifecycle events
 // http://www.gajotres.net/page-events-order-in-jquery-mobile/
 $(document).on('pagebeforecreate', '[data-role="page"]', function(){    
@@ -37,20 +32,6 @@ $(document).on('pagebeforecreate', '[data-role="page"]', function(){
     	}
 	}
 });
-
-//$(document).bind('pageinit', function(event) {
-////	alert('pageinit');
-//	$('loginForm').validate({
-//		rules: {
-//			inputEmail: {
-//				required: true
-//			},
-//			inputPassword: {
-//				required: true
-//			}
-//		}
-//	});
-//});
 
 // Tell jQuery to watch for any 401 or 403 errors and handle them appropriately
 $.ajaxSetup({

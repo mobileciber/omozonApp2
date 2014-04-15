@@ -84,6 +84,7 @@ window.LoginView = Backbone.View.extend({
 				password: password
 			};
 		};
+		console.log('trying to fetch user with name: ' + username);
 		user.fetch({
 				success: function (usermodel, response, options) {
 					usermodel.set({ username: username, password: password});

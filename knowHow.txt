@@ -37,9 +37,6 @@ http://blog.safaribooksonline.com/2013/05/16/angularjs-ngresource-tips-and-trick
 Form and Data handling:
 http://www.jquery4u.com/bootstraps/jquery-backbone-forms-codedemos/
 http://jqueryvalidation.org/documentation => jquery not fitting lifecycle
-http://suntouchersoftware.com/blog/2013/07/05/tips-for-using-the-jquery-validation-plugin/
-http://www.elijahmanor.com/jquery-mobile-form-validation/
-http://blog.leshill.org/blog/2011/08/14/jquery-validation-plugin-and-backbone.html
 http://thedersen.com/projects/backbone-validation/
 http://beletsky.net/2012/11/baby-steps-to-backbonejs-model.html
 
