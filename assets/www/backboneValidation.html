@@ -111,11 +111,9 @@ LoginView = Backbone.View.extend({
          Backbone.Validation.bind(this, {
 	         	valid: function(view, attr) {
 	         		$('#err_' + attr).html('').hide();
-	        		//alert("Callback: Validation successful..." + attr);
 	      		},
 	      		invalid: function(view, attr, error) {
 	      			$("#err_" + attr).html(error).show();
-	        		//alert("Callback: Validation failed for attribute: " + attr + ", error: " + error);
 	      		}
       		}
          );
@@ -130,17 +128,12 @@ LoginView = Backbone.View.extend({
     login:function (e) {
     	var self = this;
     	
-//    	var inputUser = $('#inputUser').val(); // attr('value') and val() retrieve the original value and prop('value') the current
-//    	var inputPassword = $('#inputPassword').val();
     	this.model.set({inputUser: $('#inputUser').val(), inputPassword: $('#inputPassword').val()});
     	
-    	alert(this.model.get("inputUser") + " : " + this.model.get("inputPassword"));
-    	
     	if (this.model.isValid(true)) {
-    		alert("Validation successful...");
+    		alert("Validation successful... You can invoke some serverside login!");
     	} else{
     		e.preventDefault(); // stops further event propagation
-    		alert("Validation failed...");
     	}
     },
 
@@ -154,12 +147,16 @@ var LoginFormModel = Backbone.Model.extend({
 	validation: {
 		inputUser: {
 	      required: true,
-	      msg: 'Please enter an email address'
+	      msg: 'Please enter an user name'
 	    },
-	    inputPassword: {
+	    inputPassword: [{
 	    		required: true,
 	    		msg: 'Please enter a password'
-		    }
+		    },
+		    {
+		    	minLength: 4,
+				msg: 'Please enter a password longer than 4 digits'
+		    }]
 	  },
 	
 	defaults: {
