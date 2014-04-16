@@ -40,22 +40,23 @@ window.HomeView = Backbone.View.extend({
 
 window.LoginView = Backbone.View.extend({
 
-    initialize:function () {
-        console.log('Initializing Login View');
-//        $('#inputUser').val('');
-//        $('#inputPassword').val('');
-//        var loginFormModel = new LoginForm({inputUser: "", inputPassword: ""});
-//        Backbone.Validation.bind(this, {
-//            model: loginFormModel
-//        });
-    },
+	initialize: function(){
+	    Backbone.Validation.bind(this, {
+	        	valid: function(view, attr) {
+	        		$('#err_' + attr).html('').hide();
+	     		},
+	     		invalid: function(view, attr, error) {
+	     			$("#err_" + attr).html(error).show();
+	     		}
+	 		}
+	    );
+	},
 
-    events: {
-//    	"submit form#loginForm": "login"
-    	"click #loginButton" : function(e){
-    		this.login(e);
-    	}
-    },
+	events: {
+		"click #loginButton" : function(e){
+			this.login(e);
+		}
+	},
 
     template:_.template($('#login').html()),
 
@@ -67,16 +68,17 @@ window.LoginView = Backbone.View.extend({
     login:function (e) {
     	var self = this;
     	
-    	var username = $('#inputUser').val(); // attr('value') and val() retrieve the original value and prop('value') the current
-    	var password = $('#inputPassword').val();
-    	alert(username + " : " + password);
+    	this.model.set({inputUser: $('#inputUser').val(), inputPassword: $('#inputPassword').val()});
     	
-    	var loginForm = new LoginForm({inputUser: username, inputPassword: password});
-    	if (!loginForm.isValid()) {
+    	if (this.model.isValid(true)) {
+    		//alert("Validation successful... You can invoke some serverside login!");
+    		this.performLogin(this.model.get("inputUser"), this.model.get("inputPassword"));
+    	} else{
     		e.preventDefault(); // stops further event propagation
-    		alert(loginForm.validationError);
     	}
-    	
+    },
+    
+    performLogin: function(username, password){
     	var user = new User({id: username});
 		user.credentials = function(){
 			return {
@@ -348,7 +350,7 @@ var AppRouter = Backbone.Router.extend({
     
     login: function() {
     	console.log('#login');
-        this.changePage(new LoginView());
+        this.changePage(new LoginView({model: new LoginFormModel()}));
     },
     
     logout: function() {

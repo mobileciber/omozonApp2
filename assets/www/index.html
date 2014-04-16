@@ -41,12 +41,14 @@
 					<div class="controls">
 						<input type="text" id="inputUser" value="" placeholder="User">
 					</div>
+					<div id="err_inputUser" class="alert alert-error" />
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="inputPassword">Password</label>
 					<div class="controls">
 						<input type="password" id="inputPassword" value="" placeholder="Password">
 					</div>
+					<div id="err_inputPassword" class="alert alert-error" />
 				</div>
 				<div class="control-group">
 					<div class="controls">
@@ -419,14 +421,14 @@
     <!--script src="lib/backbone-min.js"></script-->
     <script src="lib/backbone.js"></script>
     <script src="lib/backbone.basicauth.js"></script>
-<!--     <script src="lib/backbone-validation-0.9.1.min.js"></script> -->
+    <script src="lib/backbone-validation-0.9.1.min.js"></script>
     
     <script src="js/config.js"></script>
     <script src="js/jqm-config.js"></script>
     <script src="js/model/User.js"></script>
     <script src="js/model/LoginForm.js"></script>
     <script src="js/main.js"></script>
-    <script src="http://192.168.2.107:8080/target/target-script-min.js#uniqueId"></script>
+    <!--script src="http://192.168.2.107:8080/target/target-script-min.js#uniqueId"></script-->
 </head>
 <!-- <a href="#logout" data-icon="back" class="back ui-btn-right">logout</a> -->
 <body></body>
