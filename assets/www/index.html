@@ -37,16 +37,16 @@
 			<div id="err_loginFailed" class="alert alert-error"></div>
 			<form id="loginForm" action="#login" class="form-horizontal" autocomplete="off">
 				<div class="control-group">
-					<label class="control-label" for="inputUser">User</label>
+					<label class="control-label" for="inputUser">Benutzername</label>
 					<div class="controls">
-						<input type="text" id="inputUser" value="" placeholder="User">
+						<input type="text" id="inputUser" value="" placeholder="Benutzername">
 					</div>
 					<div id="err_inputUser" class="alert alert-error" />
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="inputPassword">Password</label>
+					<label class="control-label" for="inputPassword">Passwort</label>
 					<div class="controls">
-						<input type="password" id="inputPassword" value="" placeholder="Password">
+						<input type="password" id="inputPassword" value="" placeholder="Passwort">
 					</div>
 					<div id="err_inputPassword" class="alert alert-error" />
 				</div>
@@ -56,6 +56,8 @@
 					</div>
 				</div>
 			</form>
+			<a href="#register" data-ajax="false">Registrierung</a><br />
+	    	<a href="#passwdForgotten" data-ajax="false">Passwort vergessen?</a>
         </div>
     </script>
     
@@ -66,9 +68,102 @@
 
         <div data-role="content">
 			Thank you for using this app.<br/>
-			If you don´t get redirected to the login page, please click <a href="#login" data-ajax="false">here</a>.
+			If you don't get redirected to the login page, please click <a href="#login" data-ajax="false">here</a>.
         </div>
 	</script>
+	
+	<script type="text/template" id="register">
+
+        <div data-role="header">
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
+            <h1>Registrierung</h1>
+        </div>
+
+        <div data-role="content">
+			<div id="err_registrationFailed" class="alert alert-error"></div>
+            <form id="registerForm" action="#register" class="form-horizontal" autocomplete="off">
+				<div class="control-group">
+					<label class="control-label" for="user">Benutzername</label>
+					<div class="controls">
+						<input type="text" id="user" value="" placeholder="Benutzername">
+					</div>
+					<div id="err_id" class="alert alert-error" />
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="password">Passwort</label>
+					<div class="controls">
+						<input type="password" id="password" value="" placeholder="Passwort">
+					</div>
+					<div id="err_password" class="alert alert-error" />
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="repeatPassword">Passwort wiederholen</label>
+					<div class="controls">
+						<input type="password" id="repeatPassword" value="" placeholder="Passwort wiederholen">
+					</div>
+					<div id="err_repeatPassword" class="alert alert-error" />
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="email">E-Mail</label>
+					<div class="controls">
+						<input type="email" id="email" value="" placeholder="E-Mail">
+					</div>
+					<div id="err_email" class="alert alert-error" />
+				</div>
+				<div class="control-group">
+					Adresse:
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="name">Vor- und Zuname:</label>
+					<div class="controls">
+						<input type="text" id="name" value="" placeholder="Vor- und Zuname">
+					</div>
+					<div id="err_name" class="alert alert-error" />
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="street">Stra§e / Hausnr.:</label>
+					<div class="controls">
+						<input type="text" id="street" value="" placeholder="Stra§e / Hausnr.">
+					</div>
+					<div id="err_street" class="alert alert-error" />
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="zip">PLZ:</label>
+					<div class="controls">
+						<input type="text" id="zip" value="" placeholder="PLZ">
+					</div>
+					<div id="err_zip" class="alert alert-error" />
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="city">Stadt:</label>
+					<div class="controls">
+						<input type="text" id="city" value="" placeholder="Stadt">
+					</div>
+					<div id="err_city" class="alert alert-error" />
+				</div>
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn" id="registerButton">registrieren</button>
+					</div>
+				</div>
+			</form>
+        </div>
+
+    </script>
+    
+    <script type="text/template" id="passwdForgotten">
+
+        <div data-role="header">
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
+            <h1>Passwort vergessen?</h1>
+        </div>
+
+        <div data-role="content">
+            <p>This is Page "Passwort vergessen?". It was created dynamically using an underscore.js template.</p>
+            
+        </div>
+
+    </script>
 
     <script type="text/template" id="stores">
 

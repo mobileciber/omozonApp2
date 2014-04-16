@@ -10,7 +10,7 @@ var LoginFormModel = Backbone.Model.extend({
 		    },
 		    {
 		    	minLength: 4,
-				msg: 'Please enter a password longer than 4 digits'
+				msg: 'Please enter a password min. 4 digits long'
 		    }]
 	  },
 	

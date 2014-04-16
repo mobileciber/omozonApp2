@@ -135,6 +135,100 @@ window.LogoutView = Backbone.View.extend({
     }
 });
 
+window.RegisterView = Backbone.View.extend({
+	
+	initialize: function(){
+	    Backbone.Validation.bind(this, {
+	        	valid: function(view, attr) {
+	        		$('#err_' + attr).html('').hide();
+	        		$("#err_registrationFailed").html('').hide(); // hide msg for serverside login failed
+	     		},
+	     		invalid: function(view, attr, error) {
+	     			$("#err_" + attr).html(error).show();
+	     			$("#err_registrationFailed").html('').hide(); // hide msg for serverside login failed
+	     		}
+	 		}
+	    );
+	},
+	
+	events: {
+		"click #registerButton" : function(e){
+			this.register(e);
+		}
+	},
+	
+	register:function (e) {
+    	var self = this;
+    	
+    	this.model.set({
+    		id: $('#user').val(), 
+    		password: $('#password').val(),
+    		repeatPassword: $('#repeatPassword').val(),
+    		email: $('#email').val(),
+    		name: $('#name').val(),
+    		street: $('#street').val(),
+    		zip: $('#zip').val(),
+    		city: $('#city').val()
+    	});
+    	
+    	if (this.model.isValid(true)) {
+//    		alert("Validation successful... You can invoke some serverside registration!");
+    		this.performRegistation(this.model);
+    	} else{
+    		e.preventDefault(); // stops further event propagation
+    	}
+    },
+    
+    performRegistation: function(user){
+		user.credentials = function(){
+			return { //@ToDo: expose registration without base auth
+				username: "freddy",
+				password: "krueger"
+			};
+		};
+		console.log('trying to save user with name: ' + user.get("id"));
+		console.log('urlRoot: ' + user.urlRoot);
+		user.save({}, {
+				success: function (usermodel, response, options) {
+					$.session.set('userdata', JSON.stringify(usermodel.toJSON()));
+					console.log(usermodel.get('name') + " has signed on");
+					app.navigate("home", {trigger: true});
+                },
+                error:function (model, xhr, options) {
+                	console.log('error arguments: ', options);
+                	console.log('Remove user from session...');
+                	$.session.remove('userdata');
+                	$("#err_registrationFailed").html("User already exists. Please try another username.").show();
+                },
+                complete: function(xhr, textStatus) {
+                	console.log('fetch status: ' + textStatus);
+                	username = '';
+                	password = '';
+                }
+		});
+//		.complete(function () {
+//	        alert("done");
+//	    });
+    },
+
+    template:_.template($('#register').html()),
+
+    render:function (eventName) {
+        $(this.el).html(this.template());
+        return this;
+    }
+});
+
+window.PasswdForgottenView = Backbone.View.extend({
+
+    template:_.template($('#passwdForgotten').html()),
+
+    render:function (eventName) {
+        $(this.el).html(this.template());
+        return this;
+    }
+});
+
 window.StoresView = Backbone.View.extend({
 
     template:_.template($('#stores').html()),
@@ -322,6 +416,8 @@ var AppRouter = Backbone.Router.extend({
         "home":"home",
         "login":"login",
         "logout":"logout",
+        "register":"register",
+        "passwdForgotten":"passwdForgotten",
         "stores":"stores",
         "storeList":"storeList",
         "storeDetails":"storeDetails",
@@ -365,6 +461,18 @@ var AppRouter = Backbone.Router.extend({
     	console.log('#logout');
     	$.session.remove('userdata');
         this.changePage(new LogoutView());
+    },
+    
+    register: function() {
+    	console.log('#register');
+    	$.session.remove('userdata');
+        this.changePage(new RegisterView({model: new User()}));
+    },
+    
+    passwdForgotten: function() {
+    	console.log('#passwdForgotten');
+    	$.session.remove('userdata');
+        this.changePage(new PasswdForgottenView());
     },
 
     stores:function () {

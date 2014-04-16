@@ -18,7 +18,9 @@ $(document).on('pagebeforecreate', '[data-role="page"]', function(){
     	console.log('No session user...');
     	// we don´t want a redirect in case of loading the login or on logout page
     	console.log(window.location.hash + " - pagebeforecreate!!");
-    	if(window.location.hash != '#login' /*&& window.location.hash != '#logout'*/){
+    	if(window.location.hash != '#login' 
+    		&& window.location.hash != '#register'
+    		&& window.location.hash != '#passwdForgotten'){
     		console.log('Redirect to login...');
     		window.location.hash = '#login';
     	}
