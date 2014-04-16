@@ -44,9 +44,11 @@ window.LoginView = Backbone.View.extend({
 	    Backbone.Validation.bind(this, {
 	        	valid: function(view, attr) {
 	        		$('#err_' + attr).html('').hide();
+	        		$("#err_loginFailed").html('').hide(); // hide msg for serverside login failed
 	     		},
 	     		invalid: function(view, attr, error) {
 	     			$("#err_" + attr).html(error).show();
+	     			$("#err_loginFailed").html('').hide(); // hide msg for serverside login failed
 	     		}
 	 		}
 	    );
@@ -72,7 +74,7 @@ window.LoginView = Backbone.View.extend({
     	
     	if (this.model.isValid(true)) {
     		//alert("Validation successful... You can invoke some serverside login!");
-    		this.performLogin(this.model.get("inputUser"), this.model.get("inputPassword"));
+    		this.performLogin(this.model.get("inputUser"), this.model.get("inputPassword"), self);
     	} else{
     		e.preventDefault(); // stops further event propagation
     	}
@@ -93,12 +95,13 @@ window.LoginView = Backbone.View.extend({
 					usermodel.set({ username: username, password: password});
 					$.session.set('userdata', JSON.stringify(usermodel.toJSON()));
 					console.log(usermodel.get('name') + " has signed on");
-//					self.redirect();
+					app.navigate("home", {trigger: true});
                 },
                 error:function (model, xhr, options) {
                 	console.log('error arguments: ', options);
                 	console.log('Remove user from session...');
                 	$.session.remove('userdata');
+                	$("#err_loginFailed").html("User / password combination unknown. Please try again.").show();
                 },
                 complete: function(xhr, textStatus) {
                 	console.log('fetch status: ' + textStatus);
@@ -113,7 +116,12 @@ window.LoginView = Backbone.View.extend({
     
     redirect: function(){
 //    	app.changePage(new HomeView());
-//    	app.navigate('home', {trigger: true});
+//    	app.navigate('login', {trigger: true});
+    },
+    
+    cancel: function(e){
+    	e.preventDefault();
+        return false;
     }
 });
 

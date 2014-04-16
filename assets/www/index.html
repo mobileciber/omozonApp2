@@ -34,8 +34,8 @@
         </div>
 
         <div data-role="content">
-			<div class="alert alert-error" style="display:none;"></div>
-			<form id="loginForm" class="form-horizontal" autocomplete="off">
+			<div id="err_loginFailed" class="alert alert-error"></div>
+			<form id="loginForm" action="#login" class="form-horizontal" autocomplete="off">
 				<div class="control-group">
 					<label class="control-label" for="inputUser">User</label>
 					<div class="controls">
@@ -428,6 +428,7 @@
     <script src="js/model/User.js"></script>
     <script src="js/model/LoginForm.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/interceptors.js"></script>
     <!--script src="http://192.168.2.107:8080/target/target-script-min.js#uniqueId"></script-->
 </head>
 <!-- <a href="#logout" data-icon="back" class="back ui-btn-right">logout</a> -->

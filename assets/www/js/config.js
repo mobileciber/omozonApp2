@@ -1,2 +1,2 @@
 var omozonAppConfig = omozonAppConfig || {};
-omozonAppConfig.backendApiUrl = 'http://192.168.2.107:8484/hybridmobile-backend/api';
+omozonAppConfig.backendApiUrl = 'http://192.168.0.101:8484/hybridmobile-backend/api';
