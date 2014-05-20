@@ -1,0 +1,16 @@
+/* Links and headings */
+a, .heading{
+	color: orange;
+	font-weight: bold;
+	text-shadow:none;
+}
+
+/* Text */ 
+.text{
+	color: white;
+}
+
+/* .bgPurple{
+	background-color: rgb(85,44,135);
+} */
+/* background-image: linear-gradient(#552C87, #552C87) */

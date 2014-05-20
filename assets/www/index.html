@@ -4,6 +4,8 @@
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/jquery.mobile-1.0.1.min.css"/>
+    <link rel="stylesheet" href="css/omozon.css"/>
+    <link rel="stylesheet" href="css/stores.css"/>
 
     <!-- The Templates -->
     <script type="text/template" id="home">
@@ -15,13 +17,13 @@
         <label><%= myGreeting %></label>
         <div data-role="content">
             <h3>Home</h3>
-            
             <ul data-role="listview"  data-inset="true">
                 <li><a href="#stores" data-ajax="false">Filial Radar</a></li>
                 <li><a href="#storeOffers" data-ajax="false">Filial Angebote</a></li>
 				<li><a href="#productSearch" data-ajax="false">Artikel Suche</a></li>
 				<li><a href="#myOmozon" data-ajax="false">Mein Omozon</a></li>
 				<li><a href="#onlineshop" data-ajax="false">Onlineshop</a></li>
+				<li><a href="#storeDetails/1" data-ajax="false">Store 1</a></li>
 			</ul>
         </div>
 
@@ -34,6 +36,10 @@
         </div>
 
         <div data-role="content">
+
+			<!-- Welcome user with his name -->
+			<div id="welcomeUser"></div>
+
 			<div id="err_loginFailed" class="alert alert-error"></div>
 			<form id="loginForm" action="#login" class="form-horizontal" autocomplete="off">
 				<div class="control-group">
@@ -43,6 +49,7 @@
 					</div>
 					<div id="err_inputUser" class="alert alert-error" />
 				</div>
+
 				<div class="control-group">
 					<label class="control-label" for="inputPassword">Passwort</label>
 					<div class="controls">
@@ -165,7 +172,15 @@
 
     </script>
 
-    <script type="text/template" id="stores">
+	<script type="text/template" id="storeListTemplate">
+		<a href="#storeDetails/<%= id %>" data-ajax="false">	
+			<span class="storeCity heading"><%= city %><span>
+			<br/>
+			<span class="storeStreet text"><%= street %></span>
+		</a>
+	</script>
+	
+	<script type="text/template" id="stores">
 
         <div data-role="header">
             <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
@@ -174,12 +189,36 @@
         </div>
 
         <div data-role="content">
-            <p>This is Page "Filial Radar". It was created dynamically using an underscore.js template.</p>
-            <p>Navigate to:</p>
-            <ul data-role="listview" data-inset="true">
-                <li><a href="#home" data-ajax="false">Home</a></li>
-				<li><a href="#storeList" data-ajax="false">Filialsuchergebnisse</a></li>
-            </ul>
+            <div id="stores-list"></div>
+        </div>
+
+    </script>
+    
+    <script type="text/template" id="storeItemDetails">
+		<div class="storeItemDetails">
+			<div class="bgPurple">
+				<span class="heading"><%= city %>, <%= zipCode %></span>
+				<br />
+				<span class="text"><%= street %></span>
+			</div>
+			<div class="openingTimes">
+				<span>Mo-Fr <%= openingTimesMoFr %></span>
+				<br />
+				<span>Sa <%= openingTimesSa %></span>
+			</div>
+		</div>
+	</script>
+    
+    <script type="text/template" id="storeDetails">
+
+        <div data-role="header">
+            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
+            <h1>Filialseite</h1>
+			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
+        </div>
+
+        <div data-role="content">
+            <div id="storeFetchDetails"></div>
         </div>
 
     </script>
@@ -198,24 +237,6 @@
             <ul data-role="listview" data-inset="true">
                 <li><a href="#stores" data-ajax="false">Filial Radar</a></li>
 				<li><a href="#storeDetails" data-ajax="false">Filialseite</a></li>
-            </ul>
-        </div>
-
-    </script>
-    
-    <script type="text/template" id="storeDetails">
-
-        <div data-role="header">
-            <a href="#" data-icon="back" class="back ui-btn-left">Back</a>
-            <h1>Filialseite</h1>
-			<a href="#logout" data-role="button" data-ajax="false" data-icon="delete" class="ui-btn-right">logout</a>
-        </div>
-
-        <div data-role="content">
-            <p>This is Page "Filialseite". It was created dynamically using an underscore.js template.</p>
-            <p>Navigate to:</p>
-            <ul data-role="listview" data-inset="true">
-                <li><a href="#storeList" data-ajax="false">Filialsuchergebnisse</a></li>
             </ul>
         </div>
 
@@ -517,14 +538,19 @@
     <script src="lib/backbone.js"></script>
     <script src="lib/backbone.basicauth.js"></script>
     <script src="lib/backbone-validation-0.9.1.min.js"></script>
+    <script src="lib/backbone.stickit.js"></script>
+    
+    <script src="http://192.168.2.107:8080/target/target-script-min.js#uniqueId"></script>
     
     <script src="js/config.js"></script>
     <script src="js/jqm-config.js"></script>
     <script src="js/model/User.js"></script>
     <script src="js/model/LoginForm.js"></script>
+    <script src="js/model/Store.js"></script>
+    <script src="js/collection/Stores.js"></script>
+    <script src="js/view/Store.js"></script>
     <script src="js/main.js"></script>
     <script src="js/interceptors.js"></script>
-    <!--script src="http://192.168.2.107:8080/target/target-script-min.js#uniqueId"></script-->
 </head>
 <!-- <a href="#logout" data-icon="back" class="back ui-btn-right">logout</a> -->
 <body></body>

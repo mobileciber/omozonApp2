@@ -10,6 +10,7 @@
 //        return this;
 //    }
 //});
+var Stores;
 
 window.HomeView = Backbone.View.extend({
     // 'this' means 'window', which is the default global object
@@ -229,29 +230,92 @@ window.PasswdForgottenView = Backbone.View.extend({
     }
 });
 
-window.StoresView = Backbone.View.extend({
-
-    template:_.template($('#stores').html()),
-
-    render:function (eventName) {
-        $(this.el).html(this.template());
-        return this;
-    }
+window.StoreView = Backbone.View.extend({
+	tagName: "li",
+	className: "storeListItem bgPurple", 
+	attributes: {
+		"style": "background-image:linear-gradient(#552C87, #552C87);"
+	},
+	
+	template: _.template($('#storeListTemplate').html()),
+	
+	render: function(){
+		console.log("StoreView render");
+		this.$el.html(this.template(this.model.toJSON()));
+		return this;
+	}
+	
 });
 
-window.StoreListView = Backbone.View.extend({
+window.StoresCollectionView = Backbone.View.extend({
+	tagName: "ul",
 
-    template:_.template($('#storeList').html()),
+	attributes: { 
+		"data-role": "listview",
+		"data-inset": true
+	},
+	
+	render: function(){
+		console.log("StoresCollectionView render");
+		this.collection.each(function(store){
+			var storeView = new StoreView({ model: store});
+			var elHelp = storeView.render().el;
+			this.$el.append(elHelp);
+		}, this);
+		return this;
+	}
+});
 
+window.StoresView = Backbone.View.extend({
+
+	initialize: function(){
+		//Stores = new StoresCollection([{name: 'store 1', openingTimes: 'mo-fr'}, {name: 'store 2', openingTimes: 'sa-su'}]);
+		Stores = new StoresCollection({});
+//		this.listenTo(Stores, 'change', this.updateStoresList);
+//		this.listenTo(Stores, 'reset', this.updateStoresList);
+		console.log("StoresView initialize");
+	},
+	
+    template:_.template($('#stores').html()),
+
+    updateStoresList: function(){
+		console.log("updateStoresList");
+		var storesCollectionView = new StoresCollectionView({collection: Stores});
+		$(this.el).find('#stores-list').html(storesCollectionView.render().el).trigger('create');
+	},
+    
     render:function (eventName) {
-        $(this.el).html(this.template());
-        return this;
+    	var self = this;
+    	Stores.fetch().done(function(){
+    		self.updateStoresList();
+            return self;
+    	});
+    	$(self.el).html(self.template());
     }
 });
 
 window.StoreDetailsView = Backbone.View.extend({
 
     template:_.template($('#storeDetails').html()),
+
+    render:function (eventName) {
+    	$(this.el).html(this.template());
+        alert('You are viewing store #' + this.storeId);
+        var self = this;
+        
+    	this.store = new Store({id: storeId});
+    	this.store.fetch().done(function(){
+    		var storeTemplate = _.template($('#storeItemDetails'), store.toJSON());
+    		$(this.el).find('#storeFetchDetails').html(storeTemplate);
+    	});
+    	
+        return self;
+    }
+});
+
+window.StoreListView = Backbone.View.extend({
+
+    template:_.template($('#storeList').html()),
 
     render:function (eventName) {
         $(this.el).html(this.template());
@@ -412,6 +476,7 @@ window.OnlineshopView = Backbone.View.extend({
 var AppRouter = Backbone.Router.extend({
 
     routes:{
+    	"storeDetails/:storeId":"storeDetails",
         "":"home",
         "home":"home",
         "login":"login",
@@ -420,7 +485,6 @@ var AppRouter = Backbone.Router.extend({
         "passwdForgotten":"passwdForgotten",
         "stores":"stores",
         "storeList":"storeList",
-        "storeDetails":"storeDetails",
         "storeOffers":"storeOffers",
         "storeOfferList":"storeOfferList",
         "productDetails":"productDetails",
@@ -485,11 +549,12 @@ var AppRouter = Backbone.Router.extend({
         this.changePage(new StoreListView());
     },
     
-    storeDetails:function () {
+    storeDetails:function (storeId) {
+    	alert("storeId: " + storeId);
         console.log('#storeDetails');
-        this.changePage(new StoreDetailsView());
+        this.changePage(new StoreDetailsView(storeId));
     },
-
+    
     storeOffers:function () {
         console.log('#storeOffers');
         this.changePage(new StoreOffersView());

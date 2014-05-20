@@ -73,16 +73,22 @@
     if(credentials == null) {
       // Try URL-based.
       // Handle both string and function urls
-      remoteURL = options.url || _.result(model, 'url');
-
-      // Retrieve the auth credentials from the model url
-      remoteUrlParts = remoteURL.match(/\/\/(.*):(.*)@/);
-      if (remoteUrlParts && remoteUrlParts.length === 3) {
-        credentials = {
-          username: remoteUrlParts[1],
-          password: remoteUrlParts[2]
-        };
-      }
+//      remoteURL = options.url || _.result(model, 'url');
+//
+//      // Retrieve the auth credentials from the model url
+//      remoteUrlParts = remoteURL.match(/\/\/(.*):(.*)@/);
+//      if (remoteUrlParts && remoteUrlParts.length === 3) {
+//        credentials = {
+//          username: remoteUrlParts[1],
+//          password: remoteUrlParts[2]
+//        };
+//      }
+    	
+    	var sessionUser = $.parseJSON($.session.get('userdata'));
+    	credentials = {
+    			username: sessionUser.username,
+    			password: sessionUser.password
+    	};
     }
 
     // Add the token to the request headers if available
