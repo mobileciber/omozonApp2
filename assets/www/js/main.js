@@ -271,6 +271,14 @@ window.StoresView = Backbone.View.extend({
 	initialize: function(){
 		//Stores = new StoresCollection([{name: 'store 1', openingTimes: 'mo-fr'}, {name: 'store 2', openingTimes: 'sa-su'}]);
 		Stores = new StoresCollection({});
+		// this can be refactored to make it reusable
+		var sessionUser = $.parseJSON($.session.get('userdata'));
+		Stores.credentials = function(){
+			return {
+				username: sessionUser.username,
+    			password: sessionUser.password
+			};	
+    	};
 //		this.listenTo(Stores, 'change', this.updateStoresList);
 //		this.listenTo(Stores, 'reset', this.updateStoresList);
 		console.log("StoresView initialize");
