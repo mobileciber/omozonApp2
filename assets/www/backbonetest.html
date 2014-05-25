@@ -6,10 +6,11 @@
 <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css"/>
 <title>Insert title here</title>
 
-<script src="lib/jquery-1.7.1.min.js"></script>
+<!--script src="lib/jquery-1.7.1.min.js"></script-->
+<script src="lib/jquery-1.11.1.js"></script>
 <script src="lib/jquery.mobile-1.4.2.js"></script>
 <script src="lib/underscore.js"></script>
-<script src="lib/backbone.js"></script>
+<script src="lib/backbone-min.1.1.2.js"></script>
 <script src="lib/backbone-validation-0.9.1.min.js"></script>
 
 <script type="text/template" id="home_template">
@@ -19,7 +20,7 @@
 		<div data-role="navbar"> 
 		<ul>
 			<li><a href="#home" data-iconpos="top" data-icon="home" data-ajax="false">HOME</a></li>
-			<li><a href="#search" data-iconpos="top" data-icon="search" data-ajax="false">SEARCH</a></li>
+			<li><a href="#search/4711" data-iconpos="top" data-icon="search" data-ajax="false">SEARCH</a></li>
 		</ul>
 		</div>
 	</div>
@@ -35,7 +36,7 @@
 		<div data-role="navbar"> 
 		<ul>
 			<li><a href="#home" data-iconpos="top" data-icon="home" data-ajax="false">HOME</a></li>
-			<li><a href="#search" data-iconpos="top" data-icon="search" data-ajax="false">SEARCH</a></li>
+			<li><a href="#search/4711" data-iconpos="top" data-icon="search" data-ajax="false">SEARCH</a></li>
 		</ul>
 		</div>
 	</div>
@@ -83,7 +84,7 @@ var AppRouter = Backbone.Router.extend({
 	routes:{
         "":"home",
         "home":"home",
-        "search":"search"
+        "search/:id":"search"
 	},
 	
 	home: function(){
@@ -92,9 +93,9 @@ var AppRouter = Backbone.Router.extend({
         this.changePage(new HomeView());
 	}, 
 	
-	search: function(){
+	search: function(id){
 // 		var search_view = new SearchView({ el: $("body") });
-		console.log('#search');
+		console.log('#search' + id);
         this.changePage(new SearchView());
 	},
 	
@@ -142,7 +143,7 @@ $(document).bind( "pagechange", function( e, data ) {
 
 $(document).ready(function(){
 app = new AppRouter();
-Backbone.history.start();
+Backbone.history.start({pushState: false});
 });//]]> 
 </script>
 </head>

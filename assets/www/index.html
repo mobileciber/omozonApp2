@@ -3,7 +3,8 @@
 <head>
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/jquery.mobile-1.0.1.min.css"/>
+    <!--link rel="stylesheet" href="css/jquery.mobile-1.0.1.min.css"/-->
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.2.css"/>
     <link rel="stylesheet" href="css/omozon.css"/>
     <link rel="stylesheet" href="css/stores.css"/>
 
@@ -23,7 +24,7 @@
 				<li><a href="#productSearch" data-ajax="false">Artikel Suche</a></li>
 				<li><a href="#myOmozon" data-ajax="false">Mein Omozon</a></li>
 				<li><a href="#onlineshop" data-ajax="false">Onlineshop</a></li>
-				<li><a href="#storeDetails/1" data-ajax="false">Store 1</a></li>
+				<li><a href="#storeDetails_1" data-ajax="false">Store 1</a></li>
 			</ul>
         </div>
 
@@ -218,7 +219,12 @@
         </div>
 
         <div data-role="content">
-            <div id="storeFetchDetails"></div>
+            <p>This is Page "Filialseite". It was created dynamically using an underscore.js template.</p>
+            <p>Navigate to:</p>
+            <ul data-role="listview" data-inset="true">
+                <li><a href="#stores" data-ajax="false">Filial Radar</a></li>
+				<li><a href="#storeDetails" data-ajax="false">Filialseite</a></li>
+            </ul>
         </div>
 
     </script>
@@ -526,16 +532,17 @@
 
     <!-- The Scripts -->
     <script src="lib/gserializer.js"></script>
-    <script src="lib/jquery-1.7.1.min.js"></script>
+    <script src="lib/jquery-1.11.1.js"></script>
 <!--     <script src="lib/jquery-1.11.0.js"></script> -->
 <!--     <script src="lib/jquery-migrate-1.2.1.js"></script> -->
-    <script src="lib/jquery.mobile-1.0.1.min.js"></script>
-<!--     <script src="lib/jquery.mobile-1.4.2.min.js"></script> -->
+    <!--script src="lib/jquery.mobile-1.0.1.min.js"></script-->
+	<script src="lib/jquery.mobile-1.4.2.js"></script>
     <script src="lib/jquery.session.js"></script>
     <!--script src="lib/underscore-min.js"></script-->
     <script src="lib/underscore.js"></script>
     <!--script src="lib/backbone-min.js"></script-->
-    <script src="lib/backbone.js"></script>
+    <!--script src="lib/backbone.js"></script-->
+    <script src="lib/backbone-min.1.1.2.js"></script>
     <script src="lib/backbone.basicauth.js"></script>
     <script src="lib/backbone-validation-0.9.1.min.js"></script>
     <script src="lib/backbone.stickit.js"></script>

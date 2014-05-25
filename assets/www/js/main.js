@@ -306,18 +306,24 @@ window.StoreDetailsView = Backbone.View.extend({
 
     template:_.template($('#storeDetails').html()),
 
-    render:function (eventName) {
-    	$(this.el).html(this.template());
-        alert('You are viewing store #' + this.storeId);
-        var self = this;
-        
-    	this.store = new Store({id: storeId});
-    	this.store.fetch().done(function(){
-    		var storeTemplate = _.template($('#storeItemDetails'), store.toJSON());
-    		$(this.el).find('#storeFetchDetails').html(storeTemplate);
-    	});
-    	
-        return self;
+//    render:function (eventName) {
+//    	$(this.el).html(this.template());
+//        alert('You are viewing store #' + this.storeId);
+//        var self = this;
+//        
+//    	this.store = new Store({id: storeId});
+//    	this.store.fetch().done(function(){
+//    		var storeTemplate = _.template($('#storeItemDetails'), store.toJSON());
+//    		$(this.el).find('#storeFetchDetails').html(storeTemplate);
+//    	});
+//    	
+//        return self;
+//    }
+
+	render:function (eventName) {
+//		alert('You are viewing store #' + this.storeId);
+        $(this.el).html(this.template());
+        return this;
     }
 });
 
@@ -484,7 +490,6 @@ window.OnlineshopView = Backbone.View.extend({
 var AppRouter = Backbone.Router.extend({
 
     routes:{
-    	"storeDetails/:storeId":"storeDetails",
         "":"home",
         "home":"home",
         "login":"login",
@@ -493,6 +498,7 @@ var AppRouter = Backbone.Router.extend({
         "passwdForgotten":"passwdForgotten",
         "stores":"stores",
         "storeList":"storeList",
+        "storeDetails_:storeId":"storeDetails",
         "storeOffers":"storeOffers",
         "storeOfferList":"storeOfferList",
         "productDetails":"productDetails",
@@ -512,7 +518,8 @@ var AppRouter = Backbone.Router.extend({
 
     initialize:function () {
         // Handle back button throughout the application
-        $('.back').live('click', function(event) {
+//        $('.back').live('click', function(event) {
+        $('.back').on('click', function(event) {
             window.history.back();
             return false;
         });
@@ -560,7 +567,7 @@ var AppRouter = Backbone.Router.extend({
     storeDetails:function (storeId) {
     	alert("storeId: " + storeId);
         console.log('#storeDetails');
-        this.changePage(new StoreDetailsView(storeId));
+        this.changePage(new StoreDetailsView());
     },
     
     storeOffers:function () {
@@ -657,4 +664,5 @@ $(document).ready(function () {
     console.log('document ready');
     app = new AppRouter();
     Backbone.history.start();
+//    Backbone.history.start({ root: 'file:///android_asset/www/index.html' });
 });
