@@ -11,6 +11,9 @@
 //    }
 //});
 var Stores;
+var map; 
+var marker;
+var infoWindow;
 
 window.HomeView = Backbone.View.extend({
     // 'this' means 'window', which is the default global object
@@ -304,27 +307,27 @@ window.StoresView = Backbone.View.extend({
 
 window.StoreDetailsView = Backbone.View.extend({
 
+	initialize : function (options) {
+	  this.options = options || {};
+	},
+
     template:_.template($('#storeDetails').html()),
 
-//    render:function (eventName) {
-//    	$(this.el).html(this.template());
-//        alert('You are viewing store #' + this.storeId);
-//        var self = this;
-//        
-//    	this.store = new Store({id: storeId});
-//    	this.store.fetch().done(function(){
-//    		var storeTemplate = _.template($('#storeItemDetails'), store.toJSON());
-//    		$(this.el).find('#storeFetchDetails').html(storeTemplate);
-//    	});
-//    	
-//        return self;
-//    }
-
-	render:function (eventName) {
-//		alert('You are viewing store #' + this.storeId);
-        $(this.el).html(this.template());
+    render:function (eventName) {
+    	$(this.el).html(this.template());
+        var Str = Stores.get(this.options.storeId);
+        var self = this;
+        var jsonStr = Str.toJSON();
+        var markerText = jsonStr.city + " " + jsonStr.street;
+        
+        var storeTemplate = _.template($('#storeItemDetails').html(), jsonStr);
+		$(this.el).find('#storeFetchDetails').html(storeTemplate);
+		
+		showMap($(this.el).find('#map_canvas'), jsonStr.latitude, jsonStr.longitude, markerText);
+        		
         return this;
     }
+	
 });
 
 window.StoreListView = Backbone.View.extend({
@@ -565,9 +568,8 @@ var AppRouter = Backbone.Router.extend({
     },
     
     storeDetails:function (storeId) {
-    	alert("storeId: " + storeId);
-        console.log('#storeDetails');
-        this.changePage(new StoreDetailsView());
+        console.log('#storeDetails/' + storeId);
+        this.changePage(new StoreDetailsView({storeId: storeId}));
     },
     
     storeOffers:function () {
